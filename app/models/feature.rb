@@ -1,6 +1,7 @@
 class Feature < ApplicationRecord
   belongs_to :user
   belongs_to :product
+  
   has_many :comments
 
   acts_as_votable

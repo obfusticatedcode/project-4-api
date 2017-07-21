@@ -27,13 +27,46 @@ products = Product.create!([{
     image: "https://thetechportal.com/wp-content/uploads/2015/06/o-TWITTER-facebook.jpg",
     view_count: 0,
     user_id: users.first.id
-  }])
+  },
+  {
+    name: "iPhone",
+    category: "Electorics",
+    image: "http://www.hdwallpapers.in/walls/iphone_green_screen-normal5.4.jpg",
+    view_count: 0,
+    user_id: users.second.id
+    }])
 
-Feature.create!([{
+features = Feature.create!([{
     title: "Editing Videos",
     description: "I would love it if you guys at twitter allowed us to edit videos with Twitter",
     image: "",
     user_id: users.first.id,
     product_id: products.first.id
 
+  }])
+
+Comment
+  .create!([{
+  title: "I agree with Captain on this one.",
+  description: "I've always wanted something like this to edit my videos before uploading them",
+  user_id: users.second.id,
+  feature_id: features.first.id
+  },
+  {
+  title: "I know what you mean.",
+  description: "I would like this feature as well.",
+  user_id: users.third.id,
+  feature_id: features.first.id
+  },
+  {
+  title: "Replying to your comment.",
+  description: "I'm glad your agree lol",
+  user_id: users.second.id,
+  feature_id: features.first.id
+  },
+  {
+  title: "Cheers.",
+  description: "Let's see if twitter take our feedback",
+  user_id: users.first.id,
+  feature_id: features.first.id
   }])

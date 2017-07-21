@@ -2,7 +2,7 @@ class Comment < ApplicationRecord
   belongs_to :user
   belongs_to :feature
 
-  has_and_belongs_to_many :loves, class_name: "User", join_table: "comments_users"
+  has_and_belongs_to_many :loved_by, class_name: "User", join_table: "comments_users"
 end
 
 #The model relationships
