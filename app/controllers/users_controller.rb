@@ -5,7 +5,7 @@ class UsersController < ApplicationController
   def index
     @users = User.all
 
-    render json: @users, include: [ 'loves_products.features','loved_by.features' ]
+    render json: @users, include: [ 'loves_products.features.user','loved_by.features' ]
   end
 
   # GET /users/1
@@ -46,6 +46,6 @@ class UsersController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def user_params
-      params.require(:user).permit(:username, :firstname, :lastname, loves_ids: [])
+      params.require(:user).permit(:username, :firstname, :lastname, loved_by_ids: [])
     end
 end

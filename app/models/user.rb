@@ -1,4 +1,7 @@
 class User < ApplicationRecord
+  
+  has_secure_password
+
   has_many :products_created, class_name: "Product", foreign_key: "user_id"
   has_many :features
   has_many :comments
