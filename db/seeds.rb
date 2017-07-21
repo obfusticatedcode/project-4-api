@@ -2,7 +2,7 @@
   ActiveRecord::Base.connection.execute("TRUNCATE #{model.table_name} RESTART IDENTITY CASCADE")
 end
 
-User.create!([
+users = User.create!([
   { username: "Captain",
     firstname: "Jean-Luc",
     lastname: "Picard",
@@ -20,3 +20,20 @@ User.create!([
     email:"data@mail.com",
     image:"https://images-na.ssl-images-amazon.com/images/M/MV5BMjAxMzA3MDIwNl5BMl5BanBnXkFtZTgwMjMyNjM5NzE@._V1_UY317_CR22,0,214,317_AL_.jpg" }
 ])
+
+products = Product.create!([{
+    name: "Twitter",
+    category: "Social Media",
+    image: "https://thetechportal.com/wp-content/uploads/2015/06/o-TWITTER-facebook.jpg",
+    view_count: 0,
+    user_id: users.first.id
+  }])
+
+Feature.create!([{
+    title: "Editing Videos",
+    description: "I would love it if you guys at twitter allowed us to edit videos with Twitter",
+    image: "",
+    user_id: users.first.id,
+    product_id: products.first.id
+
+  }])
