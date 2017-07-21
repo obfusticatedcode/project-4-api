@@ -12,5 +12,5 @@ end
 # Feature belongs_to Product
 # Feature has_many Comments
 # Feature has_many_belongs_to_many Users ( up-votes )
-use a gem called, acts_as_votable
+using a gem called, acts_as_votable which gives the API for voting and down voting...
 =end
