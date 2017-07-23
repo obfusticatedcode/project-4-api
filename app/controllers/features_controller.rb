@@ -1,5 +1,5 @@
 class FeaturesController < ApplicationController
-  before_action :set_feature, only: [:show, :update, :destroy]
+  before_action :set_feature, only: [:show, :update, :destroy, :upvote, :downvote]
 
   # GET /features
   def index
@@ -16,6 +16,7 @@ class FeaturesController < ApplicationController
   # POST /features
   def create
     @feature = Feature.new(feature_params)
+    @feature.user = current_user
 
     if @feature.save
       render json: @feature, status: :created, location: @feature
@@ -35,7 +36,20 @@ class FeaturesController < ApplicationController
 
   # DELETE /features/1
   def destroy
+    return render json: { errors: ["Unauthorized"] } if @feature.user != current_user
     @feature.destroy
+  end
+
+  # acts_as_votable methods
+  # upvote and down vote from user
+  def upvote
+    @movie.upvote_from current_user
+    redirect_to features_path
+  end
+
+  def downvote
+    @movie.downvote_from current_user
+    redirect_to features_path
   end
 
   private
@@ -46,6 +60,6 @@ class FeaturesController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def feature_params
-      params.require(:feature).permit(:title, :description, :image, :user_id, :product_id, loved_by_ids: [])
+      params.permit(:title, :description, :image, :user_id, :product_id, loved_by_ids: [])
     end
 end

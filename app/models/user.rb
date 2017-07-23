@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  acts_as_voter
 
   has_many :products_created, class_name: "Product", foreign_key: "user_id"
   has_many :features

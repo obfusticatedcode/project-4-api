@@ -16,6 +16,7 @@ class CommentsController < ApplicationController
   # POST /comments
   def create
     @comment = Comment.new(comment_params)
+    @comment.user = current_user
 
     if @comment.save
       render json: @comment, status: :created, location: @comment
@@ -35,6 +36,7 @@ class CommentsController < ApplicationController
 
   # DELETE /comments/1
   def destroy
+    return render json: { errors: ["Unauthorized"] } if @feature.user != current_user
     @comment.destroy
   end
 
@@ -46,7 +48,7 @@ class CommentsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def comment_params
-      params.require(:comment).permit(:title, :description, :user_id, :feature_id, loved_by_ids: [])
+      params.permit(:title, :description, :user_id, :feature_id, loved_by_ids: [])
     end
     #loved_by_ids is a symbol in a hash
 end
