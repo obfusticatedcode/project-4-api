@@ -1,7 +1,7 @@
 class ProductsController < ApplicationController
   before_action :set_product, only: [:show, :update, :destroy]
   skip_before_action :authenticate_user!, only: [:index, :show]
-  
+
   # GET /products
   def index
     @products = Product.all
@@ -50,6 +50,6 @@ class ProductsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def product_params
-      params.permit(:name, :category, :image, :base64,:view_count, :user_id,loved_by_ids: [])
+      params.permit(:name, :category, :image, :base64, :view_count, :user_id, loved_by_ids: [])
     end
 end
