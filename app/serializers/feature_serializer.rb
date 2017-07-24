@@ -3,7 +3,16 @@ class FeatureSerializer < ActiveModel::Serializer
   belongs_to :product
   has_many :comments
 
-  attributes :id, :title, :description, :image, :user_id, :product_id
+  attributes :id, :title, :description, :image, :user_id, :product_id, :upvotes, :downvotes
+
+  def upvotes
+    object.get_upvotes.size
+  end
+
+  def downvotes
+    object.get_downvotes.size
+  end
+
 end
 
 =begin

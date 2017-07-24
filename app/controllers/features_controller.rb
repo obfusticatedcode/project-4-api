@@ -16,6 +16,7 @@ class FeaturesController < ApplicationController
   # POST /features
   def create
     @feature = Feature.new(feature_params)
+    
     @feature.user = current_user
 
     if @feature.save
@@ -44,12 +45,10 @@ class FeaturesController < ApplicationController
   # upvote and down vote from user
   def upvote
     @feature.upvote_from current_user
-    redirect_to features_path
   end
 
   def downvote
     @feature.downvote_from current_user
-    redirect_to features_path
   end
 
   private
