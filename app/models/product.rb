@@ -6,6 +6,7 @@ class Product < ApplicationRecord
 
   has_and_belongs_to_many :loved_by, class_name: "User", join_table: "products_users"
 
+  acts_as_votable
 end
 
 #The model relationships

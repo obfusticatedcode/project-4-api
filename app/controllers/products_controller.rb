@@ -1,5 +1,5 @@
 class ProductsController < ApplicationController
-  before_action :set_product, only: [:show, :update, :destroy]
+  before_action :set_product, only: [:show, :update, :destroy, :upvote, :downvote]
   skip_before_action :authenticate_user!, only: [:index, :show]
 
   # GET /products
@@ -40,6 +40,18 @@ class ProductsController < ApplicationController
   def destroy
     return render json: { errors: ["Unauthorized"] } if @product.user != current_user
     @product.destroy
+  end
+
+  # PUT /products/1/upvote
+  # acts_as_votable methods
+  # upvote and down vote from user
+  def upvote
+    @product.upvote_from current_user
+  end
+
+  # PUT /products/1/downvote
+  def downvote
+    @product.downvote_from current_user
   end
 
   private

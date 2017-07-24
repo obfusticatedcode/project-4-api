@@ -3,11 +3,20 @@ class ProductSerializer < ActiveModel::Serializer
   has_many :loved_by
   has_many :features
 
-  attributes :id, :name, :category,:view_count, :user_id, :image_src
+  attributes :id, :name, :category,:view_count, :user_id, :image_src, :upvotes, :downvotes
 
   def image_src
     object.image.url
   end
+
+  def upvotes
+    object.get_upvotes.size
+  end
+
+  def downvotes
+    object.get_downvotes.size
+  end
+
 end
 
 #The model relationships

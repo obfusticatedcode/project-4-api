@@ -43,12 +43,12 @@ class FeaturesController < ApplicationController
   # acts_as_votable methods
   # upvote and down vote from user
   def upvote
-    @movie.upvote_from current_user
+    @feature.upvote_from current_user
     redirect_to features_path
   end
 
   def downvote
-    @movie.downvote_from current_user
+    @feature.downvote_from current_user
     redirect_to features_path
   end
 
