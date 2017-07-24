@@ -1,7 +1,7 @@
 class ProductsController < ApplicationController
   before_action :set_product, only: [:show, :update, :destroy]
   skip_before_action :authenticate_user!, only: [:index, :show]
-
+  
   # GET /products
   def index
     @products = Product.all
@@ -16,6 +16,7 @@ class ProductsController < ApplicationController
 
   # POST /products
   def create
+    @product = Product.new(Uploader.upload(product_params))
     @product = Product.new(product_params)
     @product.user = current_user
 
@@ -28,7 +29,7 @@ class ProductsController < ApplicationController
 
   # PATCH/PUT /products/1
   def update
-    if @product.update(product_params)
+    if @product.update(Uploader.upload(product_params))
       render json: @product
     else
       render json: @product.errors, status: :unprocessable_entity
@@ -49,6 +50,6 @@ class ProductsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def product_params
-      params.permit(:name, :category, :image, :view_count, :user_id, loved_by_ids: [])
+      params.permit(:name, :category, :image, :base64,:view_count, :user_id,loved_by_ids: [])
     end
 end

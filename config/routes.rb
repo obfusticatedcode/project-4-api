@@ -8,7 +8,7 @@ Rails.application.routes.draw do
     post 'oauth/instagram', to: 'oauth#instagram'
     resources :users
     resources :comments
-
+    resources :products
     resources :features do
       member do
         put "love" => "features#upvote"
@@ -16,6 +16,6 @@ Rails.application.routes.draw do
       end
     end
 
-    resources :products
+
   end
 end

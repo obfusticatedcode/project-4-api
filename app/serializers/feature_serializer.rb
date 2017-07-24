@@ -1,6 +1,7 @@
 class FeatureSerializer < ActiveModel::Serializer
   belongs_to :user
   belongs_to :product
+  has_many :comments
 
   attributes :id, :title, :description, :image, :user_id, :product_id
 end

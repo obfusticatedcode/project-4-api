@@ -27,6 +27,10 @@ gem 'rack-cors'
 gem 'active_model_serializers'
 gem 'acts_as_votable'
 gem 'httparty'
+# adding in the image upload gems aka image upload
+gem 'carrierwave'
+gem 'carrierwave-base64'
+gem 'fog-aws'
 gem 'wdi_api_controller'
 
 group :development, :test do
