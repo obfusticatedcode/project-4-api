@@ -37,7 +37,7 @@ products = Product.create!([{
   },
   {
     name: "iPhone",
-    category: "Electorics",
+    category: "Electronics",
     image: "http://www.hdwallpapers.in/walls/iphone_green_screen-normal5.4.jpg",
     view_count: 0,
     user_id: users.second.id

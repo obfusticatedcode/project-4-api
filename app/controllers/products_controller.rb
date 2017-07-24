@@ -4,7 +4,7 @@ class ProductsController < ApplicationController
 
   # GET /products
   def index
-    @products = Product.all
+    @products = Product.all.order(:cached_votes_score => :desc)
 
     render json: @products
   end
