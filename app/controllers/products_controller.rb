@@ -17,7 +17,7 @@ class ProductsController < ApplicationController
   # POST /products
   def create
     @product = Product.new(Uploader.upload(product_params))
-  
+
     @product.user = current_user
 
     if @product.save
