@@ -47,11 +47,13 @@ class ProductsController < ApplicationController
   # upvote and down vote from user
   def upvote
     @product.upvote_from current_user
+    render json: @product #this returns the live votes to the page
   end
 
   # PUT /products/1/downvote
   def downvote
     @product.downvote_from current_user
+    render json: @product #this returns the live votes to the page
   end
 
   private
