@@ -38,6 +38,12 @@ class UsersController < ApplicationController
     @user.destroy
   end
 
+  #objects user voted on
+  def voted_on
+    @user.find_voted_items
+    return render json: @user  
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user
