@@ -7,17 +7,18 @@ class AuthenticationsController < ApplicationController
     if user.save
       render json: user, status: :ok
     else
-      render json: { errors: user.errors.full_messages }, status: :unprocessable_entity
+      render json: user.errors, status: :unprocessable_entity
     end
   end
 
   def login
+    return render json: { credentials: ["Invalid credentials"] }, status: 401 unless params[:email] && params[:password]
     user = User.find_by_email(params[:email])
     if user && user.authenticate(params[:password])
       token = Auth.issue({ id: user.id })
       render json: { token: token, user: UserSerializer.new(user) }, status: :ok
     else
-      render json: { errors: ["Invalid login credentials."] }, status: 401
+      render json: { credentials: ["Invalid credentials"] }, status: 401
     end
   end
 
