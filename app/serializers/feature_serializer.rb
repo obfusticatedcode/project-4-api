@@ -5,6 +5,10 @@ class FeatureSerializer < ActiveModel::Serializer
 
   attributes :id, :title, :description, :image, :user_id, :product_id, :upvotes, :downvotes
 
+  def image_src
+    object.image.url
+  end
+
   def upvotes
     object.get_upvotes.size
   end

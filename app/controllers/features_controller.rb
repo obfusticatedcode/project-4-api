@@ -3,7 +3,7 @@ class FeaturesController < ApplicationController
 
   # GET /features
   def index
-    @features = Feature.all
+    @features = Feature.all.order(:cached_votes_score => :desc)
 
     render json: @features
   end
@@ -15,8 +15,8 @@ class FeaturesController < ApplicationController
 
   # POST /features
   def create
-    @feature = Feature.new(feature_params)
-    
+    @feature = Feature.new(Uploader.upload(feature_params))
+
     @feature.user = current_user
 
     if @feature.save
@@ -45,10 +45,12 @@ class FeaturesController < ApplicationController
   # upvote and down vote from user
   def upvote
     @feature.upvote_from current_user
+    return render json: @feature
   end
 
   def downvote
     @feature.downvote_from current_user
+    return render json: @feature
   end
 
   private
