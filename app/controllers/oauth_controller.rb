@@ -44,7 +44,7 @@ class OauthController < ApplicationController
       query: {
         client_id: ENV["FACEBOOK_APP_ID"],
         client_secret: ENV["FACEBOOK_APP_SECRET"],
-        redirect_uri: 'http://localhost:7000/',
+        redirect_uri: (ENV['APP_URL'] || 'http://localhost:7000') + '/',
         code: params[:code]
       },
       headers: { "Accept" => "application/json"}
