@@ -1,4 +1,3 @@
-
 class OauthController < ApplicationController
   skip_before_action :authenticate_user!
 
@@ -13,15 +12,11 @@ class OauthController < ApplicationController
       headers: { "Accept" => "application/json"}
       }).parsed_response
 
-      p token
-
       # store the token in profile
     profile = HTTParty.get("https://api.github.com/user", {
       query: token,
       headers: { "User-Agent" => "HTTParty", "Accept" => "application/json" }
       }).parsed_response
-
-    p profile
 
       # check if the user already exists
     user = User.where(github_id: profile["id"]).first
@@ -92,8 +87,6 @@ class OauthController < ApplicationController
 
       # store the token in profile
       profile = token["user"]
-
-      p profile
 
       # check if the user already exists
     user = User.where(instagram_id: profile["id"]).first
