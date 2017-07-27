@@ -7,6 +7,11 @@ class UserSerializer < ActiveModel::Serializer
   def upvoted_items
     object.find_up_voted_items
   end
+
+  def image_src
+    object.image.url
+  end
+  
 end
 
 # The model relationships
