@@ -83,14 +83,12 @@ class OauthController < ApplicationController
       body: {
         client_id: ENV["INSTAGRAM_CLIENT_ID"],
         client_secret: ENV["INSTAGRAM_SECRET_KEY"],
-        redirect_uri: (ENV['APP_URL'] || 'http://localhost:7000') + '/',
+        redirect_uri: ENV['APP_URL'] || 'http://localhost:7000',
         grant_type: 'authorization_code',
         code: params[:code]
       },
       headers: { "Accept" => "application/json"}
       }).parsed_response
-
-      p (ENV['APP_URL'] || 'http://localhost:7000') + '/',
 
       # store the token in profile
       profile = token["user"]
