@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
 
+
   scope :api do
+    post 'tone', to: 'tone_analyzer#tone'
     post 'register', to: 'authentications#register'
     post 'login', to: 'authentications#login'
     post 'oauth/github', to: 'oauth#github'
