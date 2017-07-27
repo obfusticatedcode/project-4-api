@@ -90,7 +90,7 @@ class OauthController < ApplicationController
       headers: { "Accept" => "application/json"}
       }).parsed_response
 
-      p token
+      p (ENV['APP_URL'] || 'http://localhost:7000') + '/',
 
       # store the token in profile
       profile = token["user"]
