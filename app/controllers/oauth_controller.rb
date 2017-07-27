@@ -61,6 +61,8 @@ class OauthController < ApplicationController
       # check if the user already exists
     user = User.where("facebook_id = :facebook_id OR email = :email", facebook_id: profile["id"], email: profile["email"]).first
 
+    p profile
+
     # otherwise create a new user with github user name
     user = User.new(username: profile["login"], email: profile["email"]) unless user
     # add a facebook_id id to the user regardless whether it's an exsiting user or a new one.

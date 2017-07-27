@@ -1,6 +1,6 @@
 class User < ApplicationRecord
   mount_uploader :image, ImageUploader
-  
+
   acts_as_voter
 
   has_many :products_created, class_name: "Product", foreign_key: "user_id"
@@ -17,7 +17,7 @@ class User < ApplicationRecord
   validates :password, presence: true, confirmation: true, unless: :oauth_login?
 
   def oauth_login?
-  github_id.present? || facebook_id.present? || instagram_id.present?
+    github_id.present? || facebook_id.present? || instagram_id.present?
   end
 
 
