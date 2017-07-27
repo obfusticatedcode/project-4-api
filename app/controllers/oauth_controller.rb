@@ -13,14 +13,18 @@ class OauthController < ApplicationController
       headers: { "Accept" => "application/json"}
       }).parsed_response
 
+      p token
+
       # store the token in profile
     profile = HTTParty.get("https://api.github.com/user", {
       query: token,
       headers: { "User-Agent" => "HTTParty", "Accept" => "application/json" }
       }).parsed_response
 
+    p profile
+
       # check if the user already exists
-    user = User.where("github_id = :github_id OR email = :email", github_id: profile["id"], email: profile["email"]).first
+    user = User.where(github_id: profile["id"]).first
 
     # otherwise create a new user with github user name
     user = User.new(username: profile["login"], email: profile["email"]) unless user
@@ -50,18 +54,13 @@ class OauthController < ApplicationController
       headers: { "Accept" => "application/json"}
       }).parsed_response
 
-      p token
-
-      # store the token in profile
     profile = HTTParty.get("https://graph.facebook.com/v2.5/me?fields=id,name,first_name,last_name,email,picture.height(300)", {
       query: token,
       headers: { "User-Agent" => "HTTParty", "Accept" => "application/json" }
       }).parsed_response
 
       # check if the user already exists
-    user = User.where("facebook_id = :facebook_id OR email = :email", facebook_id: profile["id"], email: profile["email"]).first
-
-    p profile
+    user = User.where(facebook_id: profile["id"]).first
 
     # otherwise create a new user with github user name
     user = User.new(username: profile["login"], email: profile["email"]) unless user
@@ -84,7 +83,7 @@ class OauthController < ApplicationController
       body: {
         client_id: ENV["INSTAGRAM_CLIENT_ID"],
         client_secret: ENV["INSTAGRAM_SECRET_KEY"],
-        redirect_uri: 'http://localhost:7000',
+        redirect_uri: (ENV['APP_URL'] || 'http://localhost:7000') + '/',
         grant_type: 'authorization_code',
         code: params[:code]
       },
@@ -99,7 +98,7 @@ class OauthController < ApplicationController
       p profile
 
       # check if the user already exists
-    user = User.where("instagram_id = :instagram_id OR email = :email", instagram_id: profile["id"], email: profile["email"]).first
+    user = User.where(instagram_id: profile["id"]).first
 
     # otherwise create a new user with instagram user name
     user = User.new(username: profile["login"], email: profile["email"]) unless user
