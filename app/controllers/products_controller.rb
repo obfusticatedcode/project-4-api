@@ -17,7 +17,6 @@ class ProductsController < ApplicationController
   # POST /products
   def create
     @product = Product.new(Uploader.upload(product_params))
-
     @product.user = current_user
 
     if @product.save
@@ -59,7 +58,7 @@ class ProductsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_product
-      @product = Product.find(params[:id]) #this is cause a bug on the create new route.
+      @product = Product.find(params[:id]) #this is causing a bug on the create new route.
     end
 
     # Only allow a trusted parameter "white list" through.

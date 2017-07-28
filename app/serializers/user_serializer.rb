@@ -13,7 +13,6 @@ class UserSerializer < ActiveModel::Serializer
   end
 
 
-
 end
 
 # The model relationships

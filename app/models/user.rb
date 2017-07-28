@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  #This tells Rails that the image property is more than just a string, but should be treated as a file that is stored on AWS.
   mount_uploader :image, ImageUploader
 
   acts_as_voter
