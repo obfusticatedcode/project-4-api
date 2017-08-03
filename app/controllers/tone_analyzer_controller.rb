@@ -1,6 +1,7 @@
 class ToneAnalyzerController < ApplicationController
 
   def tone
+
     description = params[:description]
     authentication = {
       username: ENV["IBM_WATSON_ID"],
